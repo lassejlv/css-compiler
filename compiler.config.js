@@ -1,4 +1,5 @@
 module.exports = {
-  entry: "index.html",
-  output: "dist/styles.css",
+  entry: ".html",
+  dir: "./",
+  output: "./dist/styles.css",
 };
