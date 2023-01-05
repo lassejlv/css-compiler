@@ -1,27 +1,9 @@
-.text-center { 
-  text-align: center;
- }
-.text-white { 
-  color: #fff;
- }
-.bg-black { 
-  background: #101010;
- }
-.flex { 
-  display: flex;
- }
-.flex-col { 
-  flex-direction: column;
- }
-.items-center { 
-  align-items: center;
- }
-.justify-center { 
-  justify-content: center;
- }
-.h-100 { 
-  height: 100vh;
- }
-.font-mono { 
-  font-family: monospace;
- }
+
+/* 
+  This file was compiled with 'css-compiler'.
+  Compile Date: Thu Jan 05 2023
+  Compile Time: 1ms
+  Compile Id: v8NQXgjuduNECiSvTwFA
+  Github: https://github.com/lassv/css-compiler
+*/
+.text-center{text-align:center}.text-white{color:#fff}.bg-black{background:#101010}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.h-100{height:100vh}.font-mono{font-family:monospace}

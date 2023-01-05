@@ -2,15 +2,17 @@
   "name": "css-compiler",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "compiler.js",
   "scripts": {
-    "compile": "node compiler.js"
+    "compile": "node ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chalk": "4.1.2",
-    "clean-css": "^5.3.1"
+    "chokidar": "^3.5.3",
+    "cssmin": "^0.4.3",
+    "yourid": "^1.4.2"
   }
 }

@@ -7,22 +7,23 @@ This file is a part of the CSS-compiler
 
 "use strict";
 
+/*======== Required Packages ========*/
 const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
 const configFile = path.join(process.cwd(), "compiler.config.js");
+const minify = require("cssmin");
+const chokidar = require("chokidar");
+const Id = require("yourid");
 const TIME = Date.now();
 
 if (!fs.existsSync(configFile)) {
   throw new Error(chalk.red("Config file for the compiler was not found."));
 } else {
-  const configContent = require(configFile);
-
-  // Compiler starts here.
-  // Read all of the HTML files in the current directory
-
   try {
-    fs.readdir(configContent.dir, (err, files) => {
+    const configContent = require(configFile);
+
+    fs.readdir(__dirname || configContent.dir, (err, files) => {
       if (err) {
         console.error(err);
         return;
@@ -69,11 +70,28 @@ if (!fs.existsSync(configFile)) {
           const styles = match[2];
           if (htmlClasses.includes(className)) {
             usedClasses.push(className);
-            css += `${match[1]} { ${styles} }\n`;
+
+            // If minify is set to true
+            if (configContent.minify) {
+              css += minify(`${match[1]} { ${styles} }\n`);
+            } else {
+              css += `${match[1]} { ${styles} }\n`;
+            }
           }
         }
 
-        fs.writeFile(configContent.output, css, "utf8", (err) => {
+        /*======== CSS comment ========*/
+        const COMMENT = `
+/* 
+  This file was compiled with 'css-compiler'.
+  Compile Date: ${new Date().toDateString()}
+  Compile Time: ${Date.now() - TIME}ms
+  Compile Id: ${Id.generate({ length: 20 })}
+  Github: https://github.com/lassv/css-compiler
+*/
+`;
+
+        fs.writeFile(configContent.output, COMMENT + css, "utf8", (err) => {
           if (err) {
             console.error(err.message);
             return;
